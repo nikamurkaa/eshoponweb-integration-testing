@@ -84,6 +84,7 @@ cd eshoponweb-integration-testing
 Оригинальное приложение клонируется отдельно:
 
 ```bash
+cd ..
 git clone https://github.com/dotnet-architecture/eShopOnWeb.git
 ```
 
@@ -95,7 +96,22 @@ workspace/
 └── eshoponweb-integration-testing/
 ```
 
-Запуск оригинального проекта через Docker выполняется из его репозитория согласно его актуальной документации.
+Запуск оригинального проекта из каталога `eShopOnWeb`:
+
+```bash
+cd eShopOnWeb
+docker compose build
+docker compose up
+```
+
+Web: http://localhost:5106, Public API: http://localhost:5200.
+Подробности подготовки SQL Server или in-memory режима —
+[`docs/environment.md`](docs/environment.md). Microsoft-репозиторий архивирован;
+для воспроизводимого отчёта зафиксируйте фактически проверенный SHA командой
+`git rev-parse HEAD`. Не переносите результаты между ревизиями без повторной проверки.
+
+Из каталога этого репозитория также доступны `scripts/run-eshoponweb.ps1`
+и `scripts/run-eshoponweb.sh`; они запускают Web через .NET после подготовки БД.
 
 После запуска импортируйте в Postman:
 

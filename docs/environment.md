@@ -39,6 +39,12 @@ Public API: http://localhost:5200
 
 Оригинальный README eShopOnWeb указывает, что большая часть функциональности работает при запуске Web-проекта, но административная часть зависит от `PublicApi`.
 
+Перед `dotnet run` подготовьте SQL Server и обе базы через EF migrations
+по [README проверяемого приложения](https://github.com/dotnet-architecture/eShopOnWeb/blob/main/README.md),
+либо явно включите `UseOnlyInMemoryDatabase` в его конфигурации для учебной проверки.
+Зафиксируйте SHA командой `git rev-parse HEAD` в каталоге eShopOnWeb.
+Без подготовки БД стандартный запуск может завершиться ошибкой соединения.
+
 В первом терминале:
 
 ```bash
