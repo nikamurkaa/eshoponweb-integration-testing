@@ -1,36 +1,38 @@
+**English** | [Русский](README.ru.md)
+
 # eShopOnWeb Integration Testing
 
-**eShopOnWeb Integration Testing** — проект по интеграционному и E2E-тестированию open-source приложения **Microsoft eShopOnWeb**.
+**eShopOnWeb Integration Testing** is an integration and E2E testing project for the open-source **Microsoft eShopOnWeb** application.
 
-Исходный код eShopOnWeb не копируется в этот репозиторий. Здесь находятся только мои тестовые артефакты: стратегия, test plan, test cases, Postman smoke collection, findings, отчёт и вспомогательные инструкции.
+The eShopOnWeb source code is not copied into this repository. It contains only my testing artifacts: strategy, test plan, test cases, Postman smoke collection, findings, report, and supporting instructions.
 
-## Объект тестирования
+## System under test
 
-Microsoft eShopOnWeb — reference application на ASP.NET Core с каталогом, корзиной, оформлением заказа, Identity-аутентификацией, admin-интерфейсом и Public API.
+Microsoft eShopOnWeb is an ASP.NET Core reference application with a catalog, basket, checkout, Identity authentication, an admin interface, and a Public API.
 
-Оригинальный проект:
+Original project:
 
 ```text
 https://github.com/dotnet-architecture/eShopOnWeb
 ```
 
-## Мой вклад
+## My contributions
 
-В рамках проекта подготовлены:
+The project includes:
 
 - integration test plan;
-- стратегия Big Bang Integration Testing;
-- ручные test cases;
-- E2E checklist ключевых пользовательских сценариев;
+- a Big Bang Integration Testing strategy;
+- manual test cases;
+- an E2E checklist for key user workflows;
 - Postman smoke collection;
-- реестр findings и рисков;
+- a register of findings and risks;
 - security checklist;
-- итоговый test report;
-- инструкции по подготовке environment;
-- scripts-подсказки для запуска приложения;
-- CI-проверка структуры тестовых артефактов.
+- a final test report;
+- environment setup instructions;
+- helper scripts for starting the application;
+- CI validation of the testing artifact structure.
 
-## Структура
+## Structure
 
 ```text
 eshoponweb-integration-testing/
@@ -55,40 +57,40 @@ eshoponweb-integration-testing/
 └── README.md
 ```
 
-## Подход
+## Approach
 
-Для учебного анализа используется **Big Bang Integration Testing**: приложение рассматривается как уже собранная система, а проверка строится вокруг сквозных сценариев.
+The educational analysis uses **Big Bang Integration Testing**: the application is treated as an already integrated system, and checks focus on end-to-end workflows.
 
-Покрываются:
+Coverage includes:
 
-- открытие и работа каталога;
-- фильтрация и пагинация;
-- корзина;
+- catalog access and functionality;
+- filtering and pagination;
+- basket;
 - authentication;
-- оформление заказа;
-- история заказов;
-- административная часть;
-- базовые API/smoke checks через Postman.
+- checkout;
+- order history;
+- administration;
+- basic API/smoke checks through Postman.
 
-Ограничение подхода также зафиксировано: при падении длинного E2E-flow локализовать проблемный компонент сложнее, поэтому в отчёте есть рекомендации по дальнейшей декомпозиции тестирования.
+The approach's limitations are also documented: a failure in a long E2E flow makes the faulty component harder to isolate, so the report recommends further decomposition of the tests.
 
-## Быстрый старт
+## Quick start
 
-Клонировать репозиторий:
+Clone the repository:
 
 ```bash
 git clone https://github.com/nikamurkaa/eshoponweb-integration-testing.git
 cd eshoponweb-integration-testing
 ```
 
-Оригинальное приложение клонируется отдельно:
+Clone the original application separately:
 
 ```bash
 cd ..
 git clone https://github.com/dotnet-architecture/eShopOnWeb.git
 ```
 
-Рекомендуемая структура:
+Recommended directory structure:
 
 ```text
 workspace/
@@ -96,7 +98,7 @@ workspace/
 └── eshoponweb-integration-testing/
 ```
 
-Запуск оригинального проекта из каталога `eShopOnWeb`:
+Start the original project from the `eShopOnWeb` directory:
 
 ```bash
 cd eShopOnWeb
@@ -105,43 +107,43 @@ docker compose up
 ```
 
 Web: http://localhost:5106, Public API: http://localhost:5200.
-Подробности подготовки SQL Server или in-memory режима —
-[`docs/environment.md`](docs/environment.md). Microsoft-репозиторий архивирован;
-для воспроизводимого отчёта зафиксируйте фактически проверенный SHA командой
-`git rev-parse HEAD`. Не переносите результаты между ревизиями без повторной проверки.
+For SQL Server setup or in-memory mode, see
+[`docs/environment.md`](docs/environment.md). The Microsoft repository is archived;
+to make the report reproducible, record the SHA actually tested using
+`git rev-parse HEAD`. Do not carry results across revisions without retesting.
 
-Из каталога этого репозитория также доступны `scripts/run-eshoponweb.ps1`
-и `scripts/run-eshoponweb.sh`; они запускают Web через .NET после подготовки БД.
+The `scripts/run-eshoponweb.ps1` and
+`scripts/run-eshoponweb.sh` helpers are also available from this repository; they start Web through .NET after database setup.
 
-После запуска импортируйте в Postman:
+After startup, import the following into Postman:
 
 ```text
 postman/eshoponweb.smoke.postman_collection.json
 postman/eshoponweb.local.postman_environment.json
 ```
 
-## Ключевые артефакты
+## Key artifacts
 
-1. [`docs/test-plan.md`](docs/test-plan.md) — объём и цели тестирования.
-2. [`docs/test-strategy.md`](docs/test-strategy.md) — выбранный integration approach и ограничения.
-3. [`docs/test-cases.md`](docs/test-cases.md) — ручные сценарии.
+1. [`docs/test-plan.md`](docs/test-plan.md) — testing scope and objectives.
+2. [`docs/test-strategy.md`](docs/test-strategy.md) — selected integration approach and limitations.
+3. [`docs/test-cases.md`](docs/test-cases.md) — manual scenarios.
 4. [`checklists/e2e-checklist.md`](checklists/e2e-checklist.md) — E2E coverage.
-5. [`reports/findings.md`](reports/findings.md) — обнаруженные проблемы и риски.
-6. [`reports/test-report.md`](reports/test-report.md) — итоговые выводы.
+5. [`reports/findings.md`](reports/findings.md) — identified issues and risks.
+6. [`reports/test-report.md`](reports/test-report.md) — final conclusions.
 7. [`docs/security-checklist.md`](docs/security-checklist.md) — security-oriented checks.
 
-## Проверка артефактов
+## Artifact validation
 
 ```bash
 python tools/validate_artifacts.py
 ```
 
-CI workflow также проверяет структуру проекта автоматически.
+The CI workflow also validates the project structure automatically.
 
-## Статус
+## Status
 
-Проект завершён. Основные технические акценты — **integration testing, E2E, API testing, test design и техническая документация**.
+The project is complete. Its main technical focus is **integration testing, E2E, API testing, test design, and technical documentation**.
 
-## Автор
+## Author
 
-[Николь Журбенко](https://github.com/nikamurkaa)
+[Nicole Zhurbenko](https://github.com/nikamurkaa)
